@@ -1,8 +1,10 @@
 import Brands from "@/components/brands/Brands";
 import Categories from "@/components/categories/Categories";
+import FAQ from "@/components/faq/FAQ";
 import Features from "@/components/features/Features";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
+import PromoBanner from "@/components/promobanner/PromoBanner";
 import React from "react";
 
 function Home() {
@@ -14,6 +16,9 @@ function Home() {
         <Categories />
         <Brands />
         <Features />
+        <PromoBanner />
+        <Brands />
+        <FAQ />
       </div>
     </div>
   );
