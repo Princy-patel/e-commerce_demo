@@ -49,7 +49,7 @@ function Footer() {
         <div className="flex flex-col [&>*]:p-2 gap-3 items-center">
           <h1 className="text-2xl text-[#14b8a6]">Get the app</h1>
           <p>Lorem, ipsum.</p>
-          <div className="w-56 flex gap-2 items-center bg-[#94a3b8] [&>*]:text-black justify-center rounded-md">
+          <div className="w-56 cursor-pointer flex gap-2 items-center bg-[#94a3b8] [&>*]:text-black justify-center rounded-md">
             <div>
               <FaApple className="text-4xl" />
             </div>
@@ -60,7 +60,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="w-56 flex gap-2 items-center bg-[#94a3b8] [&>*]:text-black justify-center rounded-md">
+          <div className="w-56 cursor-pointer flex gap-2 items-center bg-[#94a3b8] [&>*]:text-black justify-center rounded-md">
             <div>
               <IoLogoGooglePlaystore className="text-4xl" />
             </div>

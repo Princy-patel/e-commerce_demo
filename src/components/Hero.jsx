@@ -26,13 +26,13 @@ function Hero() {
             <div className="w-full mt-8 bg-transparent flex justify-around lg:w-full">
               <button
                 type="button"
-                className="h-10 px-14 py-2 m-1 text-[#14b8a6] transition-colors duration-200 transform border border-[#14b8a6] rounded-md"
+                className="h-10 px-14 py-2 m-1 text-[#14b8a6] transition-colors duration-200 transform border border-[#14b8a6] rounded-md hover:bg-[#14b8a6] hover:text-white"
               >
                 Explore
               </button>
               <button
                 type="button"
-                className="h-10 px-14 py-2 m-1 text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md"
+                className="h-10 px-14 py-2 m-1 border text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md hover:text-[#14b8a6] hover:border-[#14b8a6] hover:bg-transparent"
               >
                 Buy Now
               </button>

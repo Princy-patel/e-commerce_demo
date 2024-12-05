@@ -1,4 +1,3 @@
-import Brands from "@/components/brands/Brands";
 import Categories from "@/components/categories/Categories";
 import CustomerReview from "@/components/customer-review/CustomerReview";
 import FAQ from "@/components/faq/FAQ";
@@ -9,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import PopularBrands from "@/components/popular-brands/PopularBrands";
 import PromoBanner from "@/components/promobanner/PromoBanner";
 import React from "react";
+import Products from "@/components/products/Products";
 
 function Home() {
   return (
@@ -17,10 +17,10 @@ function Home() {
       <Hero />
       <div className="container" style={{ padding: "0rem 4rem" }}>
         <Categories />
-        <Brands />
+        <Products title="Feature Products" />
         <Features />
         <PromoBanner />
-        <Brands />
+        <Products title="Most Popular Products" />
         <PopularBrands />
         <FAQ />
         <CustomerReview />

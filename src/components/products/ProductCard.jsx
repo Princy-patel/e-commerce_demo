@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { FaRegHeart } from "react-icons/fa";
 
-function BrandsCard() {
+function ProductCard() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-10">
       <div className="rounded-lg overflow-hidden shadow-lg">
@@ -172,4 +172,4 @@ function BrandsCard() {
   );
 }
 
-export default BrandsCard;
+export default ProductCard;
