@@ -1,7 +1,10 @@
 import React from "react";
 import ProductCard from "./ProductCard";
+import { useSelector } from "react-redux";
 
 function Products(props) {
+  const productData = useSelector((state) => state.productData.data);
+
   return (
     <>
       <div className="flex justify-between pt-16">
@@ -14,8 +17,14 @@ function Products(props) {
         </button>
       </div>
 
-      <div>
-        <ProductCard />
+      <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-10">
+        {productData && productData.length > 0 ? (
+          productData?.map((product, index) => (
+            <ProductCard product={product} key={product.id} />
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     </>
   );

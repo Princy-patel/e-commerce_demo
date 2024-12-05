@@ -128,7 +128,7 @@ function Navbar() {
               </Link>
               <Link
                 className="relative text-gray-700 transition-colors duration-300 transform hover:text-gray-600 p-3 bg-[#f1f5f9] rounded-md"
-                href="#"
+                href="/cart"
               >
                 <FaCartArrowDown className="w-4 h-4" />
                 <span className="absolute top-[-5px] left-[-4px] p-1 text-xs text-black bg-[#14b8a6] rounded-full"></span>
