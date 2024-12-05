@@ -1,7 +1,7 @@
 import React from "react";
 import BrandsCard from "./BrandsCard";
 
-function Brands() {
+function Brands(props) {
   return (
     <>
       <div className="flex justify-between pt-16">
