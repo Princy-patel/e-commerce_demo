@@ -38,7 +38,7 @@ function ProductCard() {
           <div className="px-6 py-4 flex flex-row items-center">
             <button
               type="button"
-              className="h-10 px-14 py-2 m-1 w-full text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md"
+              className="h-10 px-14 py-2 m-1 w-full text-white transition-colors duration-200 transform bg-[#14b8a6] bg-rounded-md hover:bg-[#2e988b] rounded-md"
             >
               Add To Cart
             </button>
@@ -79,7 +79,7 @@ function ProductCard() {
           <div className="px-6 py-4 flex flex-row items-center">
             <button
               type="button"
-              className="h-10 px-14 py-2 m-1 w-full text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md"
+              className="h-10 px-14 py-2 m-1 w-full text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md hover:bg-[#2e988b]"
             >
               Add To Cart
             </button>
@@ -120,7 +120,7 @@ function ProductCard() {
           <div className="px-6 py-4 flex flex-row items-center">
             <button
               type="button"
-              className="h-10 px-14 py-2 m-1 w-full text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md"
+              className="h-10 px-14 py-2 m-1 w-full text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md hover:bg-[#2e988b]"
             >
               Add To Cart
             </button>
@@ -161,7 +161,7 @@ function ProductCard() {
           <div className="px-6 py-4 flex flex-row items-center">
             <button
               type="button"
-              className="h-10 px-14 py-2 m-1 w-full text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md"
+              className="h-10 px-14 py-2 m-1 w-full text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md hover:bg-[#2e988b]"
             >
               Add To Cart
             </button>
