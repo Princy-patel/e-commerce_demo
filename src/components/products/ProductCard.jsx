@@ -9,6 +9,7 @@ function ProductCard({ product }) {
   const dispatch = useDispatch();
   const handleAddToCart = function (id, e) {
     e.preventDefault();
+    alert("Product added to cart");
     dispatch(addToCart(product));
   };
   return (

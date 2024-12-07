@@ -35,6 +35,22 @@ export const productSlice = createSlice({
         (item) => item.id !== action.payload
       );
     },
+    increaseProducts: (state, action) => {
+      const item = state.cartData.find((item) => item.id === action.payload.id);
+      console.log(current(item));
+      if (item) {
+        item.quantity += 1;
+        item.totalPrice = (item.totalPrice || item.price) + item.price;
+      }
+    },
+
+    decreaseProducts: (state, action) => {
+      const item = state.cartData.find((item) => item.id === action.payload.id);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+        item.totalPrice = (item.totalPrice || item.price) - item.price;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProduct.fulfilled, (state, action) => {
@@ -50,6 +66,7 @@ export const productSlice = createSlice({
   },
 });
 
-export const { addToCart, removeProducts } = productSlice.actions;
+export const { addToCart, removeProducts, increaseProducts, decreaseProducts } =
+  productSlice.actions;
 
 export default productSlice.reducer;

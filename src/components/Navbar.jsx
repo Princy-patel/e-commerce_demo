@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import { FaCartArrowDown } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 
 const menu = [
   {
@@ -35,12 +37,21 @@ const menu = [
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const pathname = usePathname();
+  console.log("params", pathname);
+  const cartDataSelector = useSelector((state) => state.productData.cartData);
+
+  const totalItems = cartDataSelector.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
+
   return (
     <>
       <nav className="bg-white shadow sticky top-0 z-50">
         <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
           <div className="flex items-center justify-between">
-            <a href="#">
+            <Link href="/">
               <Image
                 className="w-auto h-6 sm:h-7"
                 src="https://plus.unsplash.com/premium_photo-1677995700883-30df169c7517?q=80&w=1846&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -48,7 +59,7 @@ function Navbar() {
                 width={100}
                 height={100}
               />
-            </a>
+            </Link>
 
             <div className="flex lg:hidden">
               <button
@@ -116,22 +127,36 @@ function Navbar() {
             <div className="flex justify-between gap-4">
               <Link
                 className="relative text-gray-700 transition-colors duration-300 transform hover:text-gray-600 p-3 bg-[#f1f5f9] rounded-md"
-                href="#"
+                href="/"
               >
-                <FaSearch className="w-4 h-4" />
+                <FaSearch size={20} />
               </Link>
               <Link
                 className="relative text-gray-700 transition-colors duration-300 transform hover:text-gray-600 p-3 bg-[#f1f5f9] rounded-md"
-                href="#"
+                href="/"
               >
-                <MdAccountCircle className="w-4 h-4" />
+                <MdAccountCircle size={20} />
               </Link>
               <Link
-                className="relative text-gray-700 transition-colors duration-300 transform hover:text-gray-600 p-3 bg-[#f1f5f9] rounded-md"
+                className={`relative text-gray-700 transition-colors duration-300 transform hover:text-gray-600 p-3 ${
+                  pathname === "/cart"
+                    ? "bg-[#14b8a6] text-white"
+                    : "bg-[#f1f5f9]"
+                } rounded-md`}
                 href="/cart"
               >
-                <FaCartArrowDown className="w-4 h-4" />
-                <span className="absolute top-[-5px] left-[-4px] p-1 text-xs text-black bg-[#14b8a6] rounded-full"></span>
+                <FaCartArrowDown size={20} />
+                {totalItems > 0 && (
+                  <span
+                    className={`absolute top-[-6px] left-[-12px] p-1 px-2 text-xs rounded-full ${
+                      pathname === "/cart"
+                        ? "bg-[#f1f5f9] text-[#14b8a6] font-semibold"
+                        : "text-white bg-[#14b8a6]"
+                    }`}
+                  >
+                    {totalItems}
+                  </span>
+                )}
               </Link>
             </div>
           </div>

@@ -4,14 +4,36 @@ import React from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { removeProducts } from "@/slice/getProductData";
+import {
+  decreaseProducts,
+  increaseProducts,
+  removeProducts,
+} from "@/slice/getProductData";
+import Link from "next/link";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cartDataSelector = useSelector((state) => state.productData.cartData);
 
+  console.log("cartDataSelector", cartDataSelector);
+
+  const totalPrice = cartDataSelector.reduce(
+    (total, item) => total + (item.totalPrice ?? item.price),
+    0
+  );
+
+  console.log("totalPrice", totalPrice);
+
   const removeProduct = function (id) {
     dispatch(removeProducts(id));
+  };
+
+  const increaseQuantity = function (id) {
+    dispatch(increaseProducts(id));
+  };
+
+  const decreaseQuantity = function (id) {
+    dispatch(decreaseProducts(id));
   };
 
   return (
@@ -25,7 +47,7 @@ const Cart = () => {
                   <tr>
                     <th
                       scope="col"
-                      className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-black dark:text-gray-400"
                     >
                       <div className="flex items-center gap-x-3">
                         <span>PRODUCT DETAILS</span>
@@ -34,7 +56,7 @@ const Cart = () => {
 
                     <th
                       scope="col"
-                      className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-black dark:text-gray-400"
                     >
                       <button className="flex items-center gap-x-2">
                         <span>PRICE</span>
@@ -43,7 +65,7 @@ const Cart = () => {
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-black dark:text-gray-400"
                     >
                       <button className="flex items-center gap-x-2">
                         <span>QUANTITY</span>
@@ -52,14 +74,14 @@ const Cart = () => {
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-black dark:text-gray-400"
                     >
                       SHIPPING
                     </th>
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-black dark:text-gray-400"
                     >
                       SUBTOTAL
                     </th>
@@ -100,28 +122,43 @@ const Cart = () => {
                             </h2>
                           </div>
                         </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                        <td className="px-4 py-4 text-sm text-black dark:text-gray-300 whitespace-nowrap">
                           <div className="my-2 border-2 border-[#8f4533] bg-[#eedcd9] flex gap-3 leading-3 justify-center items-center space-x-4 px-3 py-1">
-                            <button className="text-xl">-</button>
+                            <button
+                              className="text-xl"
+                              onClick={decreaseQuantity.bind(null, item)}
+                            >
+                              -
+                            </button>
                             <p className="text-xl font-semibold">
                               {item.quantity}
                             </p>
-                            <button className="text-xl">+</button>
+                            <button
+                              className="text-xl"
+                              onClick={increaseQuantity.bind(null, item)}
+                            >
+                              +
+                            </button>
                           </div>
                         </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap text-center">
+                        <td className="px-4 py-4 text-sm text-black dark:text-gray-300 whitespace-nowrap text-center">
                           FREE
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center justify-center gap-x-2">
-                            <p>Rs.{item.price}</p>
+                            <p>
+                              Rs.
+                              {item.totalPrice
+                                ? Number(item.totalPrice).toFixed(2)
+                                : Number(item.price).toFixed(2)}
+                            </p>
                           </div>
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center justify-center gap-x-6">
                             <button
                               onClick={removeProduct.bind(this, item.id)}
-                              className="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"
+                              className="text-black transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"
                             >
                               <MdDelete size={30} />
                             </button>
@@ -131,8 +168,21 @@ const Cart = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={6} className="text-center py-6">
-                        No Product Found
+                      <td colSpan={6} className="py-6">
+                        <div className="flex flex-col items-center justify-center text-center">
+                          <p className="mb-4">
+                            No products in the cart yet. Start adding your
+                            favorites!
+                          </p>
+                          <Link href={"/"}>
+                            <button
+                              type="button"
+                              className="w-56 h-10 px-14 py-2 bg-[#14b8a6] transition-colors duration-200 transform border text-white border-[#14b8a6] rounded-md hover:bg-white hover:text-[#14b8a6]"
+                            >
+                              Home
+                            </button>
+                          </Link>
+                        </div>
                       </td>
                     </tr>
                   )}
@@ -148,7 +198,7 @@ const Cart = () => {
           <h3 className="font-semibold mb-4 text-gray-800 text-lg">
             Discount Codes
           </h3>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-black mb-4">
             Enter your coupon code if you have one
           </p>
           <div className="flex items-center">
@@ -166,22 +216,27 @@ const Cart = () => {
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3">
-          <div className="flex justify-between mb-4">
-            <span className="text-gray-600">Sub Total</span>
-            <span className="font-semibold text-gray-800">Rs.3050</span>
+        <div className="bg-[#f1f5f9] p-6 rounded-lg shadow-md w-full md:w-1/3 flex justify-center items-center flex-col">
+          <div className="flex justify-between gap-4 mb-4">
+            <span className="text-black">Sub Total</span>
+            <span className="font-semibold text-gray-800">
+              Rs.{totalPrice.toFixed(2)}
+            </span>
           </div>
-          <div className="flex justify-between mb-4">
-            <span className="text-gray-600">Shipping</span>
+          <div className="flex justify-between gap-4 mb-4">
+            <span className="text-black">Shipping</span>
             <span className="font-semibold text-gray-800">Rs.0.00</span>
           </div>
           <hr className="my-2 border-gray-300" />
-          <div className="flex justify-between text-lg font-semibold">
+          <div className="flex justify-between gap-4 text-lg font-semibold">
             <span className="text-gray-800">Grand Total</span>
             <span className="text-gray-800">Rs.3050</span>
           </div>
-          <button className="mt-6 w-full bg-teal-500 text-white py-3 rounded-md hover:bg-teal-600 transition-all">
-            Proceed To Checkout
+          <button
+            type="button"
+            className="h-10 px-14 py-2 m-1 border text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md hover:text-[#14b8a6] hover:border-[#14b8a6] hover:bg-transparent"
+          >
+            Proceed to checkout
           </button>
         </div>
       </div>
