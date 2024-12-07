@@ -226,7 +226,7 @@ const Cart = () => {
           <hr className="my-2 border-gray-300" />
           <div className="flex justify-between gap-4 text-lg font-semibold">
             <span className="text-gray-800">Grand Total</span>
-            <span className="text-gray-800">Rs.3050</span>
+            <span className="text-gray-800">Rs.{totalPrice.toFixed(2)}</span>
           </div>
           <button
             type="button"
