@@ -37,7 +37,6 @@ export const productSlice = createSlice({
     },
     increaseProducts: (state, action) => {
       const item = state.cartData.find((item) => item.id === action.payload.id);
-      console.log(current(item));
       if (item) {
         item.quantity += 1;
         item.totalPrice = (item.totalPrice || item.price) + item.price;

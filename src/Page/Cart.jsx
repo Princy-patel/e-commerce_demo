@@ -15,14 +15,10 @@ const Cart = () => {
   const dispatch = useDispatch();
   const cartDataSelector = useSelector((state) => state.productData.cartData);
 
-  console.log("cartDataSelector", cartDataSelector);
-
   const totalPrice = cartDataSelector.reduce(
     (total, item) => total + (item.totalPrice ?? item.price),
     0
   );
-
-  console.log("totalPrice", totalPrice);
 
   const removeProduct = function (id) {
     dispatch(removeProducts(id));

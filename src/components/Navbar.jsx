@@ -38,7 +38,6 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const pathname = usePathname();
-  console.log("params", pathname);
   const cartDataSelector = useSelector((state) => state.productData.cartData);
 
   const totalItems = cartDataSelector.reduce(
