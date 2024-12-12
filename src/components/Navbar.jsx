@@ -7,6 +7,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
+import { FaHeart } from "react-icons/fa";
 
 const menu = [
   {
@@ -153,6 +154,13 @@ function Navbar() {
                   {totalItems}
                 </span>
               )}
+            </Link>
+
+            <Link
+              className="relative text-gray-700 transition-colors duration-300 transform hover:text-gray-600 p-3 bg-[#f1f5f9] rounded-md"
+              href="/"
+            >
+              <FaHeart size={20} />
             </Link>
           </div>
         </div>

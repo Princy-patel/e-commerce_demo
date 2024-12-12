@@ -11,6 +11,7 @@ export const fetchProduct = createAsyncThunk(
 const initialState = {
   cartData: [],
   data: [],
+  wishlist: [],
   value: 0,
   loading: false,
   error: null,
@@ -50,6 +51,14 @@ export const productSlice = createSlice({
         item.totalPrice = (item.totalPrice || item.price) - item.price;
       }
     },
+
+    toggleLikes: (state, action) => {
+      const item = state.data.find((item) => item.id === action.payload);
+      if (item) {
+        state.wishlist.push(item);
+        item.isLiked = !item.isLiked;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProduct.fulfilled, (state, action) => {
@@ -65,7 +74,12 @@ export const productSlice = createSlice({
   },
 });
 
-export const { addToCart, removeProducts, increaseProducts, decreaseProducts } =
-  productSlice.actions;
+export const {
+  addToCart,
+  removeProducts,
+  increaseProducts,
+  decreaseProducts,
+  toggleLikes,
+} = productSlice.actions;
 
 export default productSlice.reducer;

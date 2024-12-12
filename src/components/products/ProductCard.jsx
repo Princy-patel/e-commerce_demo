@@ -1,9 +1,10 @@
-import { addToCart } from "@/slice/getProductData";
+import { addToCart, toggleLikes } from "@/slice/getProductData";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import { FaHeart } from "react-icons/fa";
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -11,13 +12,19 @@ function ProductCard({ product }) {
 
   const handleAddToCart = (id, e) => {
     e.preventDefault();
-    alert("Product added to cart");
     dispatch(addToCart(product));
+    alert("Product added to cart");
   };
 
   const toggleDescription = (e) => {
     e.preventDefault();
     setIsExpanded(!isExpanded);
+  };
+
+  const handleLike = (id, e) => {
+    e.preventDefault();
+    dispatch(toggleLikes(id));
+    alert("Product added to wishlist");
   };
 
   return (
@@ -35,8 +42,17 @@ function ProductCard({ product }) {
           <div className="absolute bottom-2 left-2 bg-white px-1 py-1 rounded-sm text-black text-sm font-semibold hover:bg-white hover:text-[#14b8a6] transition duration-500 ease-in-out">
             {product?.rating.rate} ⭐
           </div>
-          <div className="text-sm absolute top-0 right-0 bg-[#14b8a6] px-4 text-white rounded-full h-8 w-8 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-[#14b8a6] transition duration-500 ease-in-out">
-            <FaRegHeart />
+          <div
+            onClick={handleLike.bind(null, product.id)}
+            className={`text-sm absolute top-0 right-0 ${
+              product.isLiked ? "" : "bg-[#14b8a6]"
+            } px-4 text-white rounded-full h-8 w-8 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-[#14b8a6] transition duration-500 ease-in-out`}
+          >
+            {product.isLiked ? (
+              <FaHeart color="red" size={30} />
+            ) : (
+              <FaRegHeart />
+            )}
           </div>
         </div>
         <div className="px-4 py-3">
@@ -44,7 +60,9 @@ function ProductCard({ product }) {
             {product?.title}
           </h3>
           <p className="text-gray-500 text-sm">
-            {isExpanded ? product?.description : `${product?.description.slice(0, 100)}...`}
+            {isExpanded
+              ? product?.description
+              : `${product?.description.slice(0, 100)}...`}
             <button
               onClick={toggleDescription}
               className="text-[#14b8a6] font-semibold ml-2"
