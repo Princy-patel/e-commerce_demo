@@ -21,7 +21,7 @@ const PopularBrands = () => {
             key={brand.id}
             src={brand.logo}
             alt={brand.name}
-            className="h-16 md:h-20 object-contain grayscale hover:grayscale-0 transition duration-300"
+            className="object-contain grayscale hover:grayscale-0 transition duration-300"
             height={100}
             width={100}
           />

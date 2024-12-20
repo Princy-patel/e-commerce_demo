@@ -53,10 +53,13 @@ export const productSlice = createSlice({
     },
 
     toggleLikes: (state, action) => {
-      const item = state.data.find((item) => item.id === action.payload);
-      if (item) {
-        state.wishlist.push(item);
-        item.isLiked = !item.isLiked;
+      const productId = action.payload;
+      const wishlistItems = state.data.find((item) => item.id === productId);
+
+      if (wishlistItems) {
+        wishlistItems.isLiked = !wishlistItems.isLiked;
+      } else {
+        state.data.push({ ...item, isLiked: true });
       }
     },
   },
