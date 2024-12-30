@@ -1,3 +1,5 @@
+"use client";
+
 import Wishlist from "@/components/wishlist/Wishlist";
 import React from "react";
 

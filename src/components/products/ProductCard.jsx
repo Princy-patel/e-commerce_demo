@@ -1,3 +1,5 @@
+"use client";
+
 import { addToCart, toggleLikes } from "@/slice/getProductData";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,7 +7,7 @@ import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { FaHeart } from "react-icons/fa";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -52,10 +54,10 @@ function ProductCard({ product }) {
             <div
               onClick={handleLike}
               className={`text-sm absolute top-0 right-0 ${
-                product.isLiked ? "" : "bg-[#14b8a6]"
+                product?.isLiked ? "" : "bg-[#14b8a6]"
               } px-4 text-white rounded-full h-8 w-8 flex flex-col items-center justify-center mt-3 mr-3 transition duration-500 ease-in-out`}
             >
-              {product.isLiked ? (
+              {product?.isLiked ? (
                 <FaHeart className="text-red-500" size={30} />
               ) : (
                 <FaRegHeart />
