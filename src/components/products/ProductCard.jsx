@@ -85,7 +85,7 @@ function ProductCard({ product }) {
           <div className="px-4 py-3 mt-auto">
             <button
               className="h-10 w-full text-white transition-colors duration-200 transform bg-[#14b8a6] rounded-md hover:bg-[#2e988b]"
-              onClick={(e) => handleAddToCart(product.id, e)}
+              onClick={handleAddToCart}
             >
               Add To Cart
             </button>

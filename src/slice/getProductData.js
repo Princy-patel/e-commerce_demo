@@ -11,7 +11,6 @@ export const fetchProduct = createAsyncThunk(
 const initialState = {
   cartData: [],
   data: [],
-  wishlist: [],
   value: 0,
   loading: false,
   error: null,

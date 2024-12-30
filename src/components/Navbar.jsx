@@ -40,6 +40,11 @@ function Navbar() {
 
   const pathname = usePathname();
   const cartDataSelector = useSelector((state) => state.productData.cartData);
+  const productDataSelector = useSelector((state) => state.productData.data);
+
+  const wishlistData = productDataSelector.filter(
+    (data) => data.isLiked
+  )?.length;
 
   const totalItems = cartDataSelector.reduce(
     (acc, item) => acc + item.quantity,
@@ -158,9 +163,20 @@ function Navbar() {
 
             <Link
               className="relative text-gray-700 transition-colors duration-300 transform hover:text-gray-600 p-3 bg-[#f1f5f9] rounded-md"
-              href="/"
+              href="/wishlist"
             >
               <FaHeart size={20} />
+              {wishlistData > 0 && (
+                <span
+                  className={`absolute top-[-6px] left-[-12px] p-1 px-2 text-xs rounded-full ${
+                    pathname === "/wishlist"
+                      ? "bg-[#f1f5f9] text-[#14b8a6] font-semibold"
+                      : "text-white bg-[#14b8a6]"
+                  }`}
+                >
+                  {wishlistData}
+                </span>
+              )}
             </Link>
           </div>
         </div>
